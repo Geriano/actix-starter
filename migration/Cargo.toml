@@ -1,0 +1,25 @@
+[package]
+name = "migration"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+name = "migration"
+path = "src/lib.rs"
+
+[features]
+default = ["postgres"]
+sqlite = ["sea-orm-migration/sqlx-sqlite", "learning-management-system/sqlite"]
+postgres = ["sea-orm-migration/sqlx-postgres", "learning-management-system/postgres"]
+
+[dependencies]
+learning-management-system = { path = ".." }
+
+async-std = { version = "1", features = ["attributes", "tokio1"] }
+
+[dependencies.sea-orm-migration]
+version = "0.12.0"
+features = [
+  "runtime-tokio-rustls",
+]
